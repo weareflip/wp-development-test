@@ -1,5 +1,10 @@
 # Wordpress Development Test
 
+
+## How to Submit
+
+Please fork this Repository, commit changes to your fork and then open a PR to this repository when complete for review.
+
 ## Test Requirements
 
 Please see the `INSTRUCTIONS.md` file.
