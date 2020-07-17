@@ -3,7 +3,7 @@
 
 ## How to Submit
 
-Please fork this Repository, commit changes to your fork and then open a PR to this repository when complete for review.
+Please fork this Repository, commit changes to your fork and then open a PR to this repository when complete for review. Also, include a link in the Pull Request to download your zipped assets folder + database dump so we can quickly bootstrap the website and review.
 
 ## Test Requirements
 
