@@ -1,0 +1,61 @@
+{
+  "name": "wp-toolkit-theme",
+  "version": "0.5.0",
+  "dependencies": {
+    "bootstrap-scss": "^4.5.0"
+  },
+  "devDependencies": {
+    "@wordpress/babel-preset-default": "^4.17.0",
+    "@wordpress/blocks": "^6.20.0",
+    "@babel/preset-env": "^7.10.4",
+    "@wordpress/scripts": "^12.0.0",
+    "autoprefixer": "^8.5.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.11",
+    "dir-archiver": "^1.1.1",
+    "extract-loader": "^2.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "lodash-webpack-plugin": "^0.11.5",
+    "mini-css-extract-plugin": "^0.9.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-cli": "^5.0.0",
+    "postcss-loader": "^2.0.6",
+    "resolve-url-loader": "^3.1.1",
+    "rtlcss": "^2.5.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "svg-spritemap-webpack-plugin": "^2.6.0",
+    "svgo": "^1.0.5",
+    "svgo-loader": "^2.1.0",
+    "terser-webpack-plugin": "^3.0.6",
+    "url-loader": "^4.1.0",
+    "webfonts-loader": "^5.2.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "scripts": {
+    "watch": "webpack --config resources/assets/webpack.config.js --watch --mode development --info-verbosity verbose",
+    "dev": "npm run build:dev && npm run blocks:build",
+    "build:dev": "webpack --mode development --config resources/assets/webpack.config.js",
+    "lint:scss": "wp-scripts lint-style 'resources/assets/scss/**/*.scss'",
+    "blocks:build": "wp-scripts build 'resources/assets/blocks/custom-blocks.js' --output-path=compiled-blocks",
+    "lint:js": "wp-scripts lint-js 'resources/assets/js/*.js'",
+    "bundle": "dir-archiver --src . --dest ../wp-toolkit.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml sass style.css.map"
+  },
+  "rtlcssConfig": {
+    "options": {
+      "autoRename": false,
+      "autoRenameStrict": false,
+      "blacklist": {},
+      "clean": true,
+      "greedy": false,
+      "processUrls": false,
+      "stringMap": []
+    },
+    "plugins": [],
+    "map": false
+  }
+}

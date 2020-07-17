@@ -1,0 +1,71 @@
+version: "3.7"
+
+x-base-config: &base-config
+  volumes:
+    - "../../src/themes:/var/www/html/wp-content/themes"
+    - "../../src/plugins:/var/www/html/wp-content/plugins"
+    - "../../src/mu-plugins:/var/www/html/wp-content/mu-plugins"
+    - "../../src/assets:/var/www/html/wp-content/uploads"
+  environment:
+    WORDPRESS_DB_HOST: app.db:3306
+    WORDPRESS_DB_USER: wordpress
+    WORDPRESS_DB_PASSWORD: wordpress
+    WORDPRESS_DB_NAME: wordpress
+    # WORDPRESS_CONFIG_EXTRA: |
+    #  ======== Anything extra you wanna add to the WP-CONFIG.PHP
+    #   define('WP_CACHE', false );
+    #   define('WP_SITEURL', 'http://' . $$_SERVER['HTTP_HOST']);
+    #   define('WP_HOME', 'http://' . $$_SERVER['HTTP_HOST']);
+  depends_on:
+    - app.db
+
+x-network-access: &network
+  networks:
+    - dockernet
+
+services:
+  # app.proxy:
+  #   image: "traefik:v2.2"
+  #   command:
+  #     # - "--log.level=DEBUG"
+  #     - "--api.insecure=true"
+  #     - "--providers.docker=true"
+  #     - "--providers.docker.exposedbydefault=false"
+  #     - "--entrypoints.web.address=:80"
+  #   networks:
+  #     - dockernet
+  #   ports:
+  #     - "80:80"
+  #     - "8080:8080"
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  #   restart: always
+
+  app.wp:
+    image: wordpress:5.4.2-php7.4-apache
+    ports:
+      - "8000:80"
+    <<: *base-config
+    <<: *network
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.wp.rule=Host(`wordpress.test`)"
+    #   - "traefik.http.routers.wp.entrypoints=web"
+    #   - "traefik.http.services.wp.loadbalancer.sticky.cookie=true"
+    #   - "traefik.http.services.wp.loadbalancer.sticky.cookie.httponly=true"
+
+  app.db:
+    image: mysql:5.7
+    restart: always
+    <<: *network
+    ports:
+      - "33060:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: wordpressroot
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+
+networks:
+  dockernet:
+    driver: bridge

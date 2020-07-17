@@ -1,0 +1,33 @@
+$settings: (
+  "scoped-name": "wptoolkit",
+);
+
+$themeColors: (
+  "light-blue": #1b52d0,
+  "medium-blue": #16316f,
+  "dark-blue": #0b1938,
+  "green": #85c225,
+);
+
+@each $name, $color in $themeColors {
+  .text-#{$name} {
+    color: $color;
+  }
+  .background-#{$name} {
+    background-color: $color;
+  }
+}
+
+$themeGradients: (
+  "green-gradient":
+    radial-gradient(75% 176%, #85c225 0, #4b9835 100%, #4b9835 0),
+  "blue-gradient": linear-gradient(90deg, #12285a, #0b1938),
+);
+
+@each $name, $color in $themeGradients {
+  .background-#{$name} {
+    background: $color;
+  }
+}
+
+$brandFont: "FS Untitled";

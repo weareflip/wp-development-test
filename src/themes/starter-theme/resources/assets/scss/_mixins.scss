@@ -1,0 +1,5 @@
+@mixin theme-scoped() {
+  .is-style-#{map-get($settings, "scoped-name")} {
+    @content;
+  }
+}

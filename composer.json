@@ -1,0 +1,46 @@
+{
+    "name": "weareflip/wordpress-skeleton",
+    "type": "project",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        }
+    ],
+    "require": {
+        "php": ">=7.1",
+        "composer/installers": "^1.8"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5.4",
+        "roave/security-advisories": "dev-master"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "installer-paths": {
+            "src/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin"
+            ],
+            "src/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "src/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "scripts": {
+        "test": [
+            "phpcs"
+        ]
+    }
+}
